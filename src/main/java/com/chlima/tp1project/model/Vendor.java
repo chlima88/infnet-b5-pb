@@ -1,19 +1,25 @@
 package com.chlima.tp1project.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
+@Entity
 public class Vendor {
-    private String id;
+    @Id
+    private String vendorId;
     private LocalDateTime createdAt;
     private String name;
     private String email;
+    @OneToMany(mappedBy = "productId")
+    private List<Product> products;
 
     public Vendor() {
-        this.id = UUID.randomUUID().toString();
+        this.vendorId = UUID.randomUUID().toString();
         this.createdAt = LocalDateTime.now();
     }
 

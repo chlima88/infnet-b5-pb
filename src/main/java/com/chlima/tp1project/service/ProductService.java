@@ -24,7 +24,7 @@ public class ProductService {
     }
 
     public ProductDto createProduct(CreateProductDto producDto) {
-        Vendor vendor = vendorRepository.getById(producDto.vendorId())
+        Vendor vendor = vendorRepository.findById(producDto.vendorId())
                 .orElseThrow();
         Product product = Product.create(
                 producDto.name(),
@@ -48,7 +48,7 @@ public class ProductService {
     }
 
     public void deleteById(String productId) {
-        productRepository.removeById(productId);
+        productRepository.deleteById(productId);
     }
 
     private static ProductDto toProductDto(Product product){
@@ -58,7 +58,7 @@ public class ProductService {
                 product.getCreatedAt(),
                 product.getCategory(),
                 product.getPrice(),
-                product.getVendor().getId()
+                product.getVendor().getVendorId()
         );
     }
 }

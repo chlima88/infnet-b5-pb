@@ -1,5 +1,6 @@
 package com.chlima.tp1project.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -7,12 +8,15 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
+@Entity
 public class Product {
+    @Id
     private String productId;
     private LocalDateTime createdAt;
     private String name;
     private String category;
     private BigDecimal price;
+    @ManyToOne @JoinColumn(name = "vendor_id")
     private Vendor vendor;
 
     protected Product() {

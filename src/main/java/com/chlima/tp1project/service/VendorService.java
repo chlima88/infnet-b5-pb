@@ -17,13 +17,13 @@ public class VendorService {
     }
 
     public VendorDto getById(String vendorId){
-        Vendor vendor = vendorRepository.getById(vendorId)
+        Vendor vendor = vendorRepository.findById(vendorId)
                 .orElseThrow();
         return toVendorDto(vendor);
     }
 
     public List<VendorDto> getList() {
-        return vendorRepository.list().stream()
+        return vendorRepository.findAll().stream()
                 .map(VendorService::toVendorDto).toList();
     }
 
@@ -42,7 +42,7 @@ public class VendorService {
 
     private static VendorDto toVendorDto(Vendor vendor) {
         return new VendorDto(
-                vendor.getId(),
+                vendor.getVendorId(),
                 vendor.getName(),
                 vendor.getEmail(),
                 vendor.getCreatedAt()
